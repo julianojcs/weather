@@ -20,7 +20,7 @@ function App() {
             })
     }, [search])
 
-    function handleSubmit(e){
+    const handleSubmit = (e) => {
         e.preventDefault()
         setSearch(input)
     }
