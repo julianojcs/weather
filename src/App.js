@@ -4,7 +4,7 @@ import axios from 'axios'
 
 //Material UI
 import { Loop as LoopIcon } from '@material-ui/icons'
-import { Checkbox, Button, TextField, Card, CardHeader, CardContent, Typography,  } from '@material-ui/core';
+import { Button, TextField, Card, CardHeader, CardContent, Typography,  } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -85,11 +85,6 @@ function App() {
                 <>
                     'Loading...' 
                     <LoopIcon color="secondary" style={{ fontSize: 24 }} />
-                    <Checkbox
-                        checked={refresh}
-                        onChange={({target}) => setRefresh(target.checked)}
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
-                    />
                 </>
             }
         </div>
