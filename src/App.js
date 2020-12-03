@@ -45,6 +45,7 @@ function App() {
                         <h3>Location: {weather.location.name}</h3>
                         <h3>Region: {weather.location.region}</h3>
                         <h3>Country: {weather.location.country}</h3>
+                        <h4>Local time: {weather.location.localtime}</h4>
                         <div className="condition">
                             <h4>{weather.current.condition.text}</h4>
                             <img src={weather.current.condition.icon} alt=""/>
