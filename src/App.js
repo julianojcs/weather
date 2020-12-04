@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     content: {
       padding: '0px',
     },
-  }));
+}));
 
 function App() {
     const [weather, setWeather] = useState(null)
@@ -24,6 +24,7 @@ function App() {
     const [input, setInput] = useState('Vila Velha')
     const [notFound, setNotFound] = useState(false)
     const [refresh, setRefresh] = useState(false)
+    // const [coordinates, setCoordinates] = useState({latitude: 1, longitude: 1})
 
     const classes = useStyles();
 
@@ -32,13 +33,17 @@ function App() {
             .then(res => {
                 setWeather(res.data)
                 setNotFound(false)
-                console.log(search, res.data)
             })
             .catch(err => {
                 setNotFound(true)
                 console.log(err)
             })
     }, [search, refresh])
+
+    useEffect(() => {
+        getCoordinates()
+        console.log('getCoordinates');
+    },[])
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -48,6 +53,25 @@ function App() {
         e.preventDefault()
         setSearch(input)
         setRefresh(!refresh)
+    }
+
+    const getCoordinates = () => {
+        const success = (position) => {
+            const coordinates = `${position.coords.latitude},${position.coords.longitude}`
+            setSearch(coordinates)
+            setInput(coordinates)
+            console.log(coordinates)
+        }
+        
+        const error = () => {
+            return 'Vila Velha'
+        }
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success, error);
+        } else {
+            return {latitude: -20.348826, longitude: -40.2849142}
+        }
     }
 
     return (
@@ -80,10 +104,14 @@ function App() {
                             </Typography>
                         </CardContent>
                     </Card>
+                    <Button 
+                        onClick={getCoordinates}>
+                        Get My Location
+                    </Button>
                 </>
                 : 
                 <>
-                    'Loading...' 
+                    {/* 'Loading...'  */}
                     <LoopIcon color="secondary" style={{ fontSize: 24 }} />
                 </>
             }
