@@ -29,15 +29,18 @@ function App() {
     const classes = useStyles();
 
     useEffect(() => {
-        axios.get(`http://api.weatherapi.com/v1/current.json?key=8acbce21dc184e2498d205739200212&q=${search}`)
-            .then(res => {
-                setWeather(res.data)
-                setNotFound(false)
-            })
-            .catch(err => {
-                setNotFound(true)
-                console.log(err)
-            })
+        axios
+          .get(
+            `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_WEATHER_API}&q=${search}`
+          )
+          .then((res) => {
+            setWeather(res.data)
+            setNotFound(false)
+          })
+          .catch((err) => {
+            setNotFound(true)
+            console.log(err)
+          })
     }, [search, refresh])
 
     useEffect(() => {
